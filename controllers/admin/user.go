@@ -2,7 +2,7 @@ package admin
 
 import (
 	"github.com/astaxie/beego/validation"
-	"github.com/lisijie/goblog/models"
+	"goblog/models"
 	"strings"
 )
 

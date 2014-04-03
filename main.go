@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"github.com/lisijie/goblog/controllers/admin"
-	"github.com/lisijie/goblog/controllers/blog"
+	"goblog/controllers/admin"
+	"goblog/controllers/blog"
 )
 
 func main() {
