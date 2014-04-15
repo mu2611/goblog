@@ -16,6 +16,7 @@ type User struct {
 	Lastip     string `orm:"size(32)"`
 	Authkey    string `orm:"size(10)"`
 	Active     int8
+	Usergroup  *Usergroup `orm:"rel(fk)"`
 }
 
 func (m *User) TableName() string {

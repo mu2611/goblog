@@ -45,5 +45,11 @@ func main() {
 	beego.Router("/admin/user/edit", &admin.UserController{}, "*:Edit")
 	beego.Router("/admin/user/delete", &admin.UserController{}, "*:Delete")
 
+	//用户组管理
+	beego.Router("/admin/usergroup/list", &admin.UsergroupController{}, "*:List")
+	beego.Router("/admin/usergroup/add", &admin.UsergroupController{}, "*:Add")
+	beego.Router("/admin/usergroup/edit", &admin.UsergroupController{}, "*:Edit")
+	beego.Router("/admin/usergroup/delete", &admin.UsergroupController{}, "*:Delete")
+
 	beego.Run()
 }

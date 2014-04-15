@@ -37,12 +37,21 @@ func (this *UserController) List() {
 func (this *UserController) Add() {
 	input := make(map[string]string)
 	errmsg := make(map[string]string)
+
+	var usergroup []*models.Usergroup
+	var tempusergp *models.Usergroup
+	_, err := tempusergp.Query().All(&usergroup)
+	if err != nil {
+		this.showmsg("用户组不存在")
+	}
+
 	if this.Ctx.Request.Method == "POST" {
 		username := strings.TrimSpace(this.GetString("username"))
 		password := strings.TrimSpace(this.GetString("password"))
 		password2 := strings.TrimSpace(this.GetString("password2"))
 		email := strings.TrimSpace(this.GetString("email"))
 		active, _ := this.GetInt("active")
+		groupid, _ := this.GetInt("usergroupid")
 
 		input["username"] = username
 		input["password"] = password
@@ -85,6 +94,7 @@ func (this *UserController) Add() {
 			user.Password = models.Md5([]byte(password))
 			user.Email = email
 			user.Active = int8(active)
+			user.Usergroup.Id = groupid
 			if err := user.Insert(); err != nil {
 				this.showmsg(err.Error())
 			}
@@ -95,15 +105,24 @@ func (this *UserController) Add() {
 
 	this.Data["input"] = input
 	this.Data["errmsg"] = errmsg
+	this.Data["usergroup"] = usergroup
 	this.display()
 }
 
 //编辑用户
 func (this *UserController) Edit() {
 	id, _ := this.GetInt("id")
-	user := models.User{Id: id}
-	if err := user.Read(); err != nil {
+	user := models.User{}
+	err := user.Query().Filter("Id", id).RelatedSel("Usergroup").One(&user)
+	if err != nil {
 		this.showmsg("用户不存在")
+	}
+
+	var usergroup []*models.Usergroup
+	var tempusergp *models.Usergroup
+	_, err = tempusergp.Query().All(&usergroup)
+	if err != nil {
+		this.showmsg("用户组不存在")
 	}
 
 	errmsg := make(map[string]string)
@@ -113,6 +132,7 @@ func (this *UserController) Edit() {
 		password2 := strings.TrimSpace(this.GetString("password2"))
 		email := strings.TrimSpace(this.GetString("email"))
 		active, _ := this.GetInt("active")
+		groupid, _ := this.GetInt("usergroupid")
 		valid := validation.Validation{}
 
 		if password != "" {
@@ -138,6 +158,8 @@ func (this *UserController) Edit() {
 			user.Active = 0
 		}
 
+		user.Usergroup.Id = groupid
+
 		if len(errmsg) == 0 {
 			user.Update()
 			this.Redirect("/admin/user/list", 302)
@@ -145,6 +167,7 @@ func (this *UserController) Edit() {
 	}
 	this.Data["errmsg"] = errmsg
 	this.Data["user"] = user
+	this.Data["usergroup"] = usergroup
 	this.display()
 }
 

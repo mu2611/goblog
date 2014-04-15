@@ -30,6 +30,16 @@
 			<input type="radio" name="active" value="1" id="data_active_1" {{if eq .user.Active 1}}checked{{end}} />
 			<label for="data_active_1" class="help-inline">已激活</label>&nbsp;&nbsp;</td>
 		</tr>
+		<tr>
+			<th>所属分组：</th>
+			<td>
+				<select name="usergroupid">
+				{{range .usergroup}}
+					<option value="{{.Id}}" {{if eq .Id $.user.Usergroup.Id}}selected{{end}}>{{.Groupname}}</option>
+				{{end}}
+				</select>
+			</td>
+		</tr>
 		</tbody>
 		<tfoot>
 			<tr>

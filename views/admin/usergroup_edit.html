@@ -1,0 +1,37 @@
+<fieldset>
+	<legend>修改用户组</legend>
+
+	<form class="form-horizontal" method="post">
+	<table class="table table-form">
+		<tbody>
+		<tr>
+			<th class="span2">用户组名：</th>
+			<td><input name="groupname" value="{{.usergroup.Groupname}}" class="input" type="text" /> <span class="text-error">{{.errmsg.groupname}}</span></td>
+		</tr>
+		<tr>
+			<th>管理账号：</th>
+			<td>
+				<select name="isadmin">
+					<option value="0" {{if eq .usergroup.Isadmin 0}}selected{{end}}>普通账户</option>
+					<option value="1" {{if eq .usergroup.Isadmin 1}}selected{{end}}>管理账户</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>权限列表：</th>
+			<td><input name="manageauth" value="{{.usergroup.Manageauth}}" class="input" type="text" /> <span class="text-error">{{.errmsg.manageauth}}</span></td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th></th>
+				<td>
+				<button type="submit" class="btn"><i class="icon-ok"></i> 保存</button>
+				<button type="button" class="btn" onclick="javascript:history.back();">取消</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+
+</fieldset>
