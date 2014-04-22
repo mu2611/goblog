@@ -39,6 +39,13 @@ func main() {
 	beego.Router("/admin/article/batch", &admin.ArticleController{}, "*:Batch")
 	beego.Router("/admin/article/upload", &admin.ArticleController{}, "*:Upload")
 	beego.Router("/admin/tag", &admin.TagController{}, "*:Index")
+
+	//bbs管理
+	beego.Router("/admin/bbs/list", &admin.BbsController{}, "*:List")
+	beego.Router("/admin/bbs/add", &admin.BbsController{}, "*:Add")
+	beego.Router("/admin/bbs/edit", &admin.BbsController{}, "*:Edit")
+	beego.Router("/admin/bbs/delete", &admin.BbsController{}, "*:Delete")
+
 	//用户管理
 	beego.Router("/admin/user/list", &admin.UserController{}, "*:List")
 	beego.Router("/admin/user/add", &admin.UserController{}, "*:Add")

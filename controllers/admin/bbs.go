@@ -19,21 +19,23 @@ func (this *BbsController) List() {
 	var (
 		page       int64
 		pagesize   int64 = 10
+		status     int64
 		offset     int64
-		list       []*models.Post
-		post       models.Post
+		list       []*models.Bbs
+		bbs        models.Bbs
 		searchtype string
 		keyword    string
 	)
 	searchtype = this.GetString("searchtype")
 	keyword = this.GetString("keyword")
+	status, _ = this.GetInt("status")
 
 	if page, _ = this.GetInt("page"); page < 1 {
 		page = 1
 	}
 	offset = (page - 1) * pagesize
 
-	query := post.Query().Filter("status", status)
+	query := bbs.Query().Filter("status", status)
 
 	if keyword != "" {
 		switch searchtype {
@@ -52,7 +54,7 @@ func (this *BbsController) List() {
 	this.Data["keyword"] = keyword
 	this.Data["count"] = count
 	this.Data["list"] = list
-	this.Data["pagebar"] = models.NewPager(page, count, pagesize, fmt.Sprintf("/admin/article/list?searchtype=%s&keyword=%s", searchtype, keyword), true).ToString()
+	this.Data["pagebar"] = models.NewPager(page, count, pagesize, fmt.Sprintf("/admin/bbs/list?searchtype=%s&keyword=%s", searchtype, keyword), true).ToString()
 	this.display()
 }
 
