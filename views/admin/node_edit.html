@@ -1,0 +1,33 @@
+<fieldset>
+	<legend>修改节点</legend>
+
+	<form class="form-horizontal" method="post">
+	<table class="table table-form">
+		<tbody>
+		<tr>
+			<th class="span2">节点名：</th>
+			<td><input name="nodename" value="{{.node.Nodename}}" class="input" type="text" /> <span class="text-error">{{.errmsg.nodename}}</span></td>
+		</tr>
+		<tr>
+			<th>是否必选节点：</th>
+			<td>
+				<select name="ismust">
+					<option value="1" {{if eq .node.Ismust 1}}selected{{end}}>必须节点</option>
+					<option value="0" {{if eq .node.Ismust 0}}selected{{end}}>可选节点</option>
+				</select>
+			</td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th></th>
+				<td>
+				<button type="submit" class="btn"><i class="icon-ok"></i> 保存</button>
+				<button type="button" class="btn" onclick="javascript:history.back();">取消</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+
+</fieldset>

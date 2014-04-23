@@ -46,6 +46,12 @@ func main() {
 	beego.Router("/admin/bbs/edit", &admin.BbsController{}, "*:Edit")
 	beego.Router("/admin/bbs/delete", &admin.BbsController{}, "*:Delete")
 
+	//Node管理
+	beego.Router("/admin/node/list", &admin.NodeController{}, "*:List")
+	beego.Router("/admin/node/add", &admin.NodeController{}, "*:Add")
+	beego.Router("/admin/node/edit", &admin.NodeController{}, "*:Edit")
+	beego.Router("/admin/node/delete", &admin.NodeController{}, "*:Delete")
+
 	//用户管理
 	beego.Router("/admin/user/list", &admin.UserController{}, "*:List")
 	beego.Router("/admin/user/add", &admin.UserController{}, "*:Add")

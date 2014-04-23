@@ -21,7 +21,7 @@ func init() {
 	}
 	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
 	orm.RegisterDataBase("default", "mysql", dsn)
-	orm.RegisterModel(new(User), new(Usergroup), new(Post), new(Tag), new(Option), new(TagPost), new(Bbs))
+	orm.RegisterModel(new(User), new(Usergroup), new(Post), new(Tag), new(Option), new(TagPost), new(Bbs), new(Node))
 }
 
 func Md5(buf []byte) string {

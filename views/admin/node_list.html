@@ -1,0 +1,32 @@
+<fieldset>
+	<legend>节点列表 <a href="/admin/node/add" class="btn btn-default" role="button">添加</a></legend>
+	<table class="table table-hover table-list">
+		<thead>
+		<tr>
+			<th width="30">ID</th>
+			<th>节点名</th>
+			<th width="150">是否管理</th>
+			<th width="80">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		{{range $k, $v := .list}}
+			<tr>
+				<td>{{$v.Id}}</td>
+				<td>{{$v.Nodename}}</td>
+				<td>{{if eq 1 $v.Ismust}}<span style="color:red;">必须节点</span>{{else}}可选节点{{end}}</td>
+				<td>
+					<a href="/admin/node/edit?id={{$v.Id}}">编辑</a> | 
+					<a href="/admin/node/delete?id={{$v.Id}}" onclick="return del_confirm()">删除</a>
+				</td>
+			</tr>
+		{{end}}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="20">{{str2html .pagebar}}</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</fieldset>
